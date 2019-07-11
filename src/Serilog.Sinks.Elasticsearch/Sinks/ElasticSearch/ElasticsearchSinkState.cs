@@ -140,7 +140,7 @@ namespace Serilog.Sinks.Elasticsearch
             {
                 if (!_options.OverwriteTemplate)
                 {
-                    var templateExistsResponse = _client.IndicesExistsTemplateForAll<DynamicResponse>(_templateName);
+                    var templateExistsResponse = _client.Indices.ExistsTemplateForAll<DynamicResponse>(_templateName);
                     if (templateExistsResponse.HttpStatusCode == 200)
                     {
                         TemplateRegistrationSuccess = true;
@@ -149,7 +149,7 @@ namespace Serilog.Sinks.Elasticsearch
                     }
                 }
 
-                var result = _client.IndicesPutTemplateForAll<DynamicResponse>(_templateName, GetTempatePostData());
+                var result = _client.Indices.PutTemplateForAll<DynamicResponse>(_templateName, GetTempatePostData());
 
                 if (!result.Success)
                 {
